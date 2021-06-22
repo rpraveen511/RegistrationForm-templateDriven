@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PasswordMatchDirective } from './password-match.directive';
+
 
 @Component({
   selector: 'app-root',
@@ -13,13 +15,13 @@ export class AppComponent {
     email : '',
     mobile : '',
     password : '',
-    password1 : '',
+    confirmPassword : '',
   }
   passwordFlag = false;
 
 
   onSubmit(){
-    if (this.user.password !== this.user.password1){
+    if (this.user.password !== this.user.confirmPassword){
       this.passwordFlag = true;
     } else {
       console.log(this.user);

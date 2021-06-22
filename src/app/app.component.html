@@ -4,14 +4,15 @@
     <div class="col-md-8 offset-md-2">
       <h3 class="center">Registration Form</h3>
       <!-- Form  -->
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <form name="form" #registerForm="ngForm" [appPasswordMatch]="['password', 'confirmPassword']"
+        (ngSubmit)="registerForm.form.valid && onSubmit()" novalidate>
         <!-- First Name -->
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel"
             [ngClass]="{ 'is-invalid':firstName.touched && firstName.invalid }" minlength="3" maxlength="16" required />
           <div *ngIf="firstName.touched && firstName.invalid" class="invalid-feedback">
-            <div *ngIf="firstName.errors.required">First Name is required</div>
+            <div *ngIf="firstName.errors?.required">First Name is required</div>
             <div *ngIf="firstName.invalid">First Name should be 3-16 Alphabets</div>
           </div>
         </div>
@@ -22,7 +23,7 @@
           <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel"
             [ngClass]="{ 'is-invalid': lastName.touched && lastName.invalid }" minlength="3" maxlength="16" required />
           <div *ngIf="lastName.touched && lastName.invalid" class="invalid-feedback">
-            <div *ngIf="lastName.errors.required">Last Name is required</div>
+            <div *ngIf="lastName.errors?.required">Last Name is required</div>
             <div *ngIf="lastName.invalid">Last Name should be 3-16 Alphabets</div>
           </div>
         </div>
@@ -33,8 +34,8 @@
           <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel"
             [ngClass]="{ 'is-invalid': email.touched && email.invalid }" required email />
           <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="email.errors?.required">Email is required</div>
+            <div *ngIf="email.errors?.email">Email must be a valid email address</div>
           </div>
         </div>
 
@@ -44,7 +45,7 @@
           <input type="number" class="form-control" name="mobile" [(ngModel)]="user.mobile" #mobile="ngModel"
             [ngClass]="{ 'is-invalid': mobile.touched && mobile.invalid }" pattern="[789][0-9]{9}" required />
           <div *ngIf="mobile.touched  && mobile.invalid" class="invalid-feedback">
-            <div *ngIf="mobile.errors.required">Mobile Number is required</div>
+            <div *ngIf="mobile.errors?.required">Mobile Number is required</div>
             <div *ngIf="mobile.invalid">Mobile Number should start with 7 or 8 or 9 and it will be 10 digits</div>
 
           </div>
@@ -56,25 +57,27 @@
           <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel"
             [ngClass]="{ 'is-invalid':password.touched && password.invalid }" required minlength="6" />
           <div *ngIf="password.touched && password.invalid" class="invalid-feedback">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="password.errors?.required">Password is required</div>
+            <div *ngIf="password.errors?.minlength">Password must be at least 6 characters</div>
           </div>
         </div>
 
         <!-- Confirm Password -->
         <div class="form-group">
-          <label for="password1">Confirm Password</label>
-          <input type="password" class="form-control" name="password1" [(ngModel)]="user.password1" #password1="ngModel"
-            [ngClass]="{ 'is-invalid': password1.touched && password1.invalid }" required minlength="6" />
-          <div *ngIf="password1.touched && password1.invalid" class="invalid-feedback">
-            <div *ngIf="password1.errors.required">Password is required</div>
-            <div *ngIf="password1.errors.minlength">Password must be at least 6 characters</div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="user.confirmPassword"
+            #confirmPassword="ngModel" [ngClass]="{ 'is-invalid': confirmPassword.touched && confirmPassword.invalid }"
+            required minlength="6" />
+          <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="invalid-feedback">
+            <div *ngIf="confirmPassword.errors?.passwordMismatch">Password mismatch</div>
+            <div *ngIf="confirmPassword.errors?.required">Confirm Password is required</div>
+            <div *ngIf="password.errors?.minlength">Password must be at least 6 characters</div>
+
           </div>
-          <!-- <div *ngIf="user.password !== user.password1" class="invalid-feedback">Password not matched</div> -->
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary" [disabled]="f.form.invalid">Register</button>
+          <button class="btn btn-primary" [disabled]="registerForm.form.invalid">Register</button>
         </div>
       </form>
     </div>
