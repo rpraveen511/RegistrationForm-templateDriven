@@ -17,14 +17,9 @@ export class AppComponent {
     password : '',
     confirmPassword : '',
   }
-  passwordFlag = false;
 
 
   onSubmit(){
-    if (this.user.password !== this.user.confirmPassword){
-      this.passwordFlag = true;
-    } else {
-      console.log(this.user);
-    }
+    console.log(this.user);
   }
 }
