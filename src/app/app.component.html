@@ -13,7 +13,7 @@
             [ngClass]="{ 'is-invalid':firstName.touched && firstName.invalid }" minlength="3" maxlength="16" required />
           <div *ngIf="firstName.touched && firstName.invalid" class="invalid-feedback">
             <div *ngIf="firstName.errors?.required">First Name is required</div>
-            <div *ngIf="firstName.invalid">First Name should be 3-16 Alphabets</div>
+            <div *ngIf="firstName.invalid && !firstName.errors?.required">First Name should be 3-16 Alphabets</div>
           </div>
         </div>
 
@@ -24,7 +24,7 @@
             [ngClass]="{ 'is-invalid': lastName.touched && lastName.invalid }" minlength="3" maxlength="16" required />
           <div *ngIf="lastName.touched && lastName.invalid" class="invalid-feedback">
             <div *ngIf="lastName.errors?.required">Last Name is required</div>
-            <div *ngIf="lastName.invalid">Last Name should be 3-16 Alphabets</div>
+            <div *ngIf="lastName.invalid && !lastName.errors?.required">Last Name should be 3-16 Alphabets</div>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
             [ngClass]="{ 'is-invalid': mobile.touched && mobile.invalid }" pattern="[789][0-9]{9}" required />
           <div *ngIf="mobile.touched  && mobile.invalid" class="invalid-feedback">
             <div *ngIf="mobile.errors?.required">Mobile Number is required</div>
-            <div *ngIf="mobile.invalid">Mobile Number should start with 7 or 8 or 9 and it will be 10 digits</div>
+            <div *ngIf="mobile.invalid && !mobile.errors?.required">Mobile Number should start with 7 or 8 or 9 and it will be 10 digits</div>
 
           </div>
         </div>
