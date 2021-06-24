@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { PasswordMatchDirective } from './password-match.directive';
-
 
 @Component({
   selector: 'app-root',
@@ -17,7 +15,6 @@ export class AppComponent {
     password : '',
     confirmPassword : '',
   }
-
 
   onSubmit(){
     console.log(this.user);
